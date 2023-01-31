@@ -54,7 +54,7 @@ def PPV(matrix):
 
 def NPV(matrix):
     """
-    Negative predicted value (aka recall) measures how often negative classifications are correct. In other words,
+    Negative predicted value measures how often negative classifications are correct. In other words,
     given a patient tests negative, NPV is the likelihood that they don't have the disease.
 
     In terms of the confusion matrix, NPV is:
@@ -76,10 +76,11 @@ def NPV(matrix):
 
     return npv
 
+
 def sensitivity(matrix):
     """
-    Sensitivity measures how often a positive member is classified as positive. In other words, given a patient has a
-    disease, sensitivity is the likelihood that they test positive.
+    Sensitivity (aka recall or true positive rate) measures how often a positive member is classified as positive.
+    In other words, given a patient has a disease, sensitivity is the likelihood that they test positive.
 
     In terms of the confusion matrix, sensitivity is:
     SEN = TP / (TP + FN)
@@ -95,3 +96,40 @@ def sensitivity(matrix):
         sen = tp / (tp + fn)
 
     return sen
+
+
+def specificity(matrix):
+    """
+    Specificity (aka selectivity or true negative rate) measures how often a negative member is classified as negative.
+    In other words, given a patient does not have a disease, specificity is the likelihood that they test negative.
+
+    In terms of the confusion matrix, specificity is:
+    SEN = TN / (TN + FP)
+
+    :param matrix: 2x2 confusion matrix
+    :return: specificity
+    """
+    (tp, fn), (fp, tn) = matrix
+
+    if tn + fp == 0:  # if there are no members of the negative class, then specificity should be 1
+        spec = 1
+    else:
+        spec = tn / (tn + fp)
+
+    return spec
+
+
+def BAC(matrix):
+    """
+    Balanced accuracy combines sensitivity and specificity into a single metric.
+
+    In terms of the confusion balanced accuracy is:
+    BAC = 0.5 * (TP/(TP + FN) + TN/(TN + FP)) = 0.5 * (SEN + SPEC)
+    :param matrix: 2x2 confusion matrix
+    :return: balanced accuracy
+    """
+
+    return (sensitivity(matrix) + specificity(matrix))/2
+
+
+# TODO: F1, FB
