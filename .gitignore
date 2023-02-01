@@ -7,5 +7,7 @@
 *.iml
 out
 gen
+*__pycache__*
 
-tiny_contest_data_training/*
+tinyml_contest_data_training/*
+saved_models/*
