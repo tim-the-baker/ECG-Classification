@@ -3,10 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import torchvision.transforms as transforms
 from torch.utils.data import Dataset, DataLoader
-
-# directories for data and data labels
-ECG_DIR = r"..\tinyml_contest_data_training"
-LABEL_DIR = r"..\data_indices"
+from exploration.directories import ECG_DIR, LABEL_DIR
 
 # given a heart rhythm abbreviation, this dict returns the rhythm's full name.
 RHYTHM_ABBR_TO_FULL = {
